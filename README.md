@@ -1,7 +1,6 @@
 # 🏥 Previsão de Custos Médicos & Análise de Risco
 
 > **Projeto:** Modelagem Estatística | **Instituição:** CESUPA  
-> **Status:** Concluído ✅
 
 ## 📋 Sobre o Projeto
 Este projeto aplica técnicas avançadas de Ciência de Dados e Estatística para analisar custos médicos individuais e prever riscos de sinistralidade para seguradoras de saúde. 
@@ -85,5 +84,6 @@ A aplicação de modelos não-lineares e otimização de hiperparâmetros gerou 
 
 
 *Projeto desenvolvido para a disciplina de Modelagem Estatística (2º Bimestre) - CESUPA.*
+
 
 
