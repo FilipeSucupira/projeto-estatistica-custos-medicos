@@ -83,9 +83,6 @@ A aplicação de modelos não-lineares e otimização de hiperparâmetros gerou 
   * **Fonte dos Dados:** Dados públicos baseados no censo dos EUA (Domínio Público / ODbL).
   * **Alunos:** Filipe César e Everton Gustavo
 
------
 
 *Projeto desenvolvido para a disciplina de Modelagem Estatística (2º Bimestre) - CESUPA.*
 
-```
-```
