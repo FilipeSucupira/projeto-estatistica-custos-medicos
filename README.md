@@ -1,6 +1,6 @@
 # 🏥 Previsão de Custos Médicos & Análise de Risco
 
-> **Projeto Final:** Modelagem Estatística | **Instituição:** CESUPA  
+> **Projeto:** Modelagem Estatística | **Instituição:** CESUPA  
 > **Status:** Concluído ✅
 
 ## 📋 Sobre o Projeto
@@ -71,7 +71,7 @@ A aplicação de modelos não-lineares e otimização de hiperparâmetros gerou 
 ## 📁 Estrutura do Repositório
 
 ```text
-├── notebook_projeto_final.ipynb   # Código fonte completo, narrativa e gráficos
+├── notebook.ipynb   # Código fonte completo, narrativa e gráficos
 ├── requirements.txt               # Lista de bibliotecas necessárias
 ├── README.md                      # Documentação do projeto
 └── (Outros arquivos de config do git)
@@ -85,4 +85,5 @@ A aplicação de modelos não-lineares e otimização de hiperparâmetros gerou 
 
 
 *Projeto desenvolvido para a disciplina de Modelagem Estatística (2º Bimestre) - CESUPA.*
+
 
