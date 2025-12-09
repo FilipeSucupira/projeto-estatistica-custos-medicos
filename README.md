@@ -1,89 +1,119 @@
-# 🏥 Previsão de Custos Médicos & Análise de Risco
+# Previsão de Custos Médicos e Identificação de Alto Risco — Modelagem Estatística
 
-> **Projeto:** Modelagem Estatística | **Instituição:** CESUPA  
-
-## 📋 Sobre o Projeto
-Este projeto aplica técnicas avançadas de Ciência de Dados e Estatística para analisar custos médicos individuais e prever riscos de sinistralidade para seguradoras de saúde. 
-
-O desenvolvimento seguiu um pipeline rigoroso de **Data Storytelling**, cobrindo desde a Análise Exploratória de Dados (EDA) com testes de hipóteses até a implementação e otimização de modelos de Machine Learning.
-
-### 🎯 Objetivos de Negócio
-1.  **Regressão (Previsão de Valor):** Estimar o custo médico exato (`charges`) com base em variáveis demográficas (idade, região) e comportamentais (BMI, tabagismo).
-2.  **Classificação (Gestão de Risco):** Identificar segurados de **Alto Risco** (custo acima da mediana) para precificação ajustada e programas de prevenção.
-3.  **Inferência Estatística:** Validar estatisticamente (via Teste T e ANOVA) quais fatores têm causalidade real no aumento de custos.
+ **Disciplina:** Modelagem Estatística — 2º Bimestre  
+ **Instituição:** CESUPA  
+ **Autores:** Filipe César e Everton Gustavo  
+ **Data:** Dezembro/2025  
 
 ---
 
-## 🛠️ Ferramentas e Metodologia
-O projeto foi desenvolvido em **Python 3.12**, priorizando a reprodutibilidade e a interpretabilidade dos modelos.
+## Visão Geral do Projeto
 
-* **Manipulação de Dados:** Pandas, Numpy.
-* **Visualização (Gestalt):** Seaborn, Matplotlib.
-* **Estatística Inferencial:** Statsmodels (Diagnóstico de resíduos, VIF, P-values).
-* **Machine Learning:** Scikit-Learn.
-    * *Modelos:* Regressão Linear, Polinomial, Logística, Naive Bayes e Gradient Boosting.
-    * *Otimização:* RandomizedSearchCV (Tuning de Hiperparâmetros).
+Este projeto aplica técnicas avançadas de Estatística e Machine Learning para:
 
-> **Nota Técnica:** Optou-se pelo uso de `RandomizedSearchCV` do Scikit-Learn para a otimização (no lugar do PyCaret) para garantir controle granular dos hiperparâmetros e total compatibilidade com o ambiente Python 3.12.
+- **Prever despesas médicas individuais** (`charges`),  
+- **Identificar beneficiários com alto risco de sinistralidade**,  
+- **Avaliar relações causais entre fatores comportamentais e custos médicos.**
+
+O trabalho foi desenvolvido seguindo um pipeline reprodutível de *data science*, com foco em rigor estatístico, visualização interpretativa (*data storytelling*) e análise crítica dos modelos.
+
+O dataset utilizado é o **Medical Cost Personal Dataset (Kaggle)**, contendo informações reais sobre segurados do sistema de saúde dos EUA. Licença: Domínio Público 
 
 ---
 
-## 🚀 Como Executar o Projeto
+## Objetivos
 
-### Pré-requisitos
-Certifique-se de ter o Python instalado. Recomenda-se o uso de um ambiente virtual (venv).
+| Área | Objetivo | Métrica Primária |
+|------|----------|----------------|
+| **Regressão** | Estimar o valor exato dos custos médicos (`charges`) | R², RMSE, MAE |
+| **Classificação** | Identificar indivíduos com alto custo (`high_cost = 1`) | Recall, F1, AUC-ROC |
+| **Inferência Estatística** | Verificar se fatores como tabagismo e BMI têm impacto significativo | Teste t, ANOVA, p-values |
+
+---
+
+## Tecnologias Utilizadas
+
+| Categoria | Ferramentas |
+|----------|-------------|
+| Manipulação de Dados | `pandas`, `numpy` |
+| Visualização | `matplotlib`, `seaborn` (com princípios Gestalt) |
+| Estatística | `scipy`, `statsmodels` (diagnóstico, VIF, resíduos, p-values) |
+| Machine Learning | `scikit-learn`, `RandomizedSearchCV`, `GridSearchCV` |
+| AutoML (documentado) | `pycaret` (fluxo referenciado; não executado por incompatibilidade Python 3.12) |
+
+---
+
+## Metodologia
+
+O pipeline foi estruturado da seguinte forma:
+
+1. **Coleta e documentação do dataset**
+2. **EDA com testes estatísticos:**
+   - Shapiro-Wilk (normalidade)
+   - T-test (fumantes vs. não fumantes)
+   - ANOVA (impacto da região)
+   - Correlações
+3. **Feature Engineering:**
+   - `log(charges)` → reduzir assimetria
+   - `high_cost` → classificador baseado no percentil 75
+4. **Modelagem Base:**
+   - Regressão Linear, Polinomial
+   - Gaussian Naive Bayes
+   - Regressão Logística
+5. **Otimização:**
+   - **RandomizedSearchCV** → Gradient Boosting (Regressão)
+   - **GridSearchCV** → Logistic Regression (Classificação, foco em Recall)
+6. **Avaliação Final:**
+   - métricas + matriz de confusão + ROC + comparação tabelada
+7. **Discussão de vieses, limitações e uso real**
+
+---
+
+## Resultados
+
+| Tarefa | Modelo Final | Desempenho |
+|--------|-------------|------------|
+| **Regressão** | Gradient Boosting + RandomSearchCV | **R² ≈ 0.88**, menor RMSE da análise |
+| **Classificação** | Logistic Regression + GridSearchCV | **Recall > 0.90**, AUC-ROC elevada |
+| **Baseline Comparativo** | DummyClassifier e Linear Regression | Serviram como referência inferior |
+
+---
+
+## Insights Principais (EDA)
+
+| Achado | Implicação de Negócio |
+|--------|-----------------------|
+| **Tabagismo é o maior driver de custo (p < 0.001)** | Fator obrigatório em precificação, tarifação dinâmica e segmentação |
+| **BMI interage com tabagismo de forma não linear** | Justifica o uso de modelos polinomiais e métodos baseados em árvores |
+| **Transformação log melhora estabilidade dos resíduos** | Fundamental para inferência estatística via OLS |
+
+---
+
+## Estrutura do Repositório
+
+medical-cost-modeling
+
+│
+├── notebook.ipynb
+
+├── README.md
+
+└── requirements.txt, Dependências do ambiente
+
+
+## Como Executar
 
 ```bash
-# 1. Clone este repositório
-git clone [https://github.com/SEU_USUARIO/NOME_DO_REPO.git](https://github.com/SEU_USUARIO/NOME_DO_REPO.git)
+# 1. Clonar o repositório
+git clone https://github.com/SEU_USUARIO/NOME_DO_REPO.git
 
-# 2. Acesse a pasta do projeto
+# 2. Entrar na pasta
 cd NOME_DO_REPO
 
-# 3. Instale as dependências
+# 3. Instalar dependências
 pip install -r requirements.txt
 
-# 4. Execute o Jupyter Notebook
-jupyter notebook
-````
+# 4. Executar o projeto
+jupyter notebook notebook.ipynb
 
------
-
-## 📈 Resultados Chave
-
-A aplicação de modelos não-lineares e otimização de hiperparâmetros gerou ganhos expressivos na precisão:
-
-| Modelo | Tarefa | Métrica Principal | Performance |
-| :--- | :--- | :--- | :--- |
-| **Gradient Boosting (Tuned)** | Regressão | R² (Explicação da Variância) | **\~0.88** 🏆 |
-| **Regressão Polinomial** | Regressão | R² | \~0.86 |
-| **Regressão Linear (Baseline)** | Regressão | R² | \~0.75 |
-| **Regressão Logística** | Classificação | Recall (Sensibilidade) | **\> 0.90** |
-
-### 🔍 Principais Insights (EDA)
-
-1.  **O Fator Crítico:** Tabagismo é o maior determinante de custo ($p < 0.05$).
-2.  **Interação Perigosa:** A relação entre BMI (Índice de Massa Corporal) e Custo não é linear. Para fumantes, o aumento do BMI faz o custo crescer exponencialmente, o que justifica a superioridade dos modelos Polinomiais e de Boosting.
-
------
-
-## 📁 Estrutura do Repositório
-
-```text
-├── notebook.ipynb   # Código fonte completo, narrativa e gráficos
-├── requirements.txt               # Lista de bibliotecas necessárias
-├── README.md                      # Documentação do projeto
-└── (Outros arquivos de config do git)
 ```
-
-## ⚖️ Créditos e Licença
-
-  * **Dataset:** [Medical Cost Personal Datasets (Kaggle)](https://www.kaggle.com/mirichoi0218/insurance)
-  * **Fonte dos Dados:** Dados públicos baseados no censo dos EUA (Domínio Público / ODbL).
-  * **Alunos:** Filipe César e Everton Gustavo
-
-
-*Projeto desenvolvido para a disciplina de Modelagem Estatística (2º Bimestre) - CESUPA.*
-
-
-
