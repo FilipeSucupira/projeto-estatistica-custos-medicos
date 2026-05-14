@@ -3,7 +3,9 @@
  **Disciplina:** Modelagem Estatística — 2º Bimestre  
  **Instituição:** CESUPA  
  **Autores:** Filipe César e Everton Gustavo  
- **Data:** Dezembro/2025  
+ **Data:** Dezembro/2025
+
+ **Teste da Maldade**
 
 ---
 
